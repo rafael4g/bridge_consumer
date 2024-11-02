@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Login</title>
+</head>
+
+<body>
+ <div class="container">
+  <h2>Página de Login</h2>
+  <form id="loginForm">
+   <label for="username">Usuário:</label>
+   <input type="text" id="username" name="username" required>
+   <label for="password">Senha:</label>
+   <input type="password" id="password" name="password" required>
+   <button type="submit">Login</button>
+  </form>
+
+
+  <div id="uploadSection" style="display:none;">
+   <h2>Upload de Arquivo</h2>
+   <input type="file" id="fileInput">
+   <button onclick="uploadFile()">Enviar Arquivo</button>
+   <div id="timer">Tempo logado: <span id="sessionTime">0</span> segundos</div>
+  </div>
+
+  <script>
+   let timerInterval;
+   let sessionStartTime;
+
+   document.getElementById('loginForm').onsubmit = async (event) => {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+     const response = await fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+     });
+
+     if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('token', data.access_token);
+
+      // Inicia o timer
+      sessionStartTime = Date.now();
+      startSessionTimer();
+
+      // Exibe a seção de upload
+      document.getElementById('uploadSection').style.display = 'block';
+      document.getElementById('loginForm').style.display = 'none';
+     } else {
+      alert('Login falhou');
+     }
+    } catch (error) {
+     console.error('Erro:', error);
+    }
+   };
+
+   function startSessionTimer() {
+    timerInterval = setInterval(() => {
+     const elapsed = Math.floor((Date.now() - sessionStartTime) / 1000);
+     document.getElementById('sessionTime').innerText = elapsed;
+    }, 1000);
+   }
+
+   async function uploadFile() {
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput.files.length === 0) {
+     alert('Selecione um arquivo para enviar');
+     return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    try {
+     const response = await fetch('/upload', {
+      method: 'POST',
+      headers: {
+       'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: formData
+     });
+
+     if (response.ok) {
+      const data = await response.json();
+      alert(`Upload concluído! Código de importação: ${data.import_code}`);
+     } else {
+      alert('Erro no upload');
+     }
+    } catch (error) {
+     console.error('Erro:', error);
+    }
+   }
+  </script>
+</body>
+
+</html>

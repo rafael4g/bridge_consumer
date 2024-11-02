@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h2 {
+  color: #da291c;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+form label {
+  display: block;
+  text-align: left;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px;
+  border: 2px solid #da291c;
+  border-radius: 5px;
+  background-color: #ffffff;
+  font-size: 1em;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+  outline: none;
+  border-color: #da291c;
+  box-shadow: 0px 0px 5px rgba(218, 41, 28, 0.5);
+}
+
+button {
+  background-color: #ffc722;
+  color: #333;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #e6b814;
+}
+
+#uploadSection {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+#timer {
+  text-align: right;
+  margin-top: 10px;
+  color: #da291c;
+}
