@@ -9,7 +9,11 @@ et_xmlfile==2.0.0
 exceptiongroup==1.2.2
 executing==2.1.0
 Flask==3.0.3
+Flask-Cors==5.0.0
 Flask-JWT-Extended==4.6.0
+Flask-Login==0.6.3
+Flask-SQLAlchemy==3.1.1
+greenlet==3.1.1
 ipykernel==6.29.5
 ipython==8.29.0
 itsdangerous==2.2.0
@@ -39,6 +43,7 @@ python-decouple==3.8
 pytz==2024.2
 pyzmq==26.2.0
 six==1.16.0
+SQLAlchemy==2.0.36
 stack-data==0.6.3
 tornado==6.4.1
 traitlets==5.14.3

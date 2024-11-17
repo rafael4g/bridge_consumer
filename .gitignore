@@ -1,7 +1,8 @@
 node_modules
-.venv
+*.venv
 *.csv
 *.xls*
-.env
-.duckdb
-.parquet
+*.env
+*.duckdb
+*.parquet
+*__pycache__*
